@@ -1,0 +1,141 @@
+section {
+    margin-bottom: 20px;
+}
+
+#hero {
+    background-color:#F1F3FF;
+}
+
+.navbar-brand {
+    background-color: #0D28A6;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus, .navbar-toggler:active {
+    outline: none;
+}
+
+.close-navbar {
+    display: none;
+}
+
+.car-img {
+    width: 100%;
+    transform: scaleX(-1);
+}
+
+.border {
+    border: solid 2px black;
+}
+
+.car-background {
+    content: '';
+    background-color:#0D28A6;
+    position: absolute;
+    top: 45%;
+    left: 3%;
+    width: 97%;
+    height: 55%;
+    border-radius: 30% 0 0 0;
+}
+
+#hero .btn-success {
+    width: 160px;
+}
+
+
+@media screen and (width < 992px) {
+    .navbar-collapse.show {
+        width: 245px;
+        height: 100%;
+        background-color: white;
+        position: fixed;
+        animation: slideIn 0.3s ease-out;
+        right: 0;
+        top: 0;
+        margin-left: 1rem;
+        z-index: 100;
+        line-height: 40px;
+        padding: 90px 0 0 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-collapse {
+        width: 245px;
+        height: 100%;
+        background-color: white;
+        position: fixed;
+        animation: slideOut 0.3s ease-in;
+        right: -1000px;
+        top: 0;
+        margin-left: 1rem;
+        z-index: 100;
+        line-height: 40px;
+        padding: 90px 0 0 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes slideIn {
+        0% { right: -1000px};
+        100% {right: 0};
+    }
+
+    @keyframes slideOut {
+        0% { right: 0;}
+        100% {right: -1000px;}
+    }
+
+    .navbar-collapse::before {
+        content: 'BCR';
+        font-size: 22px;
+        font-weight: bold;
+        position: absolute;
+        top: 30px;
+    }
+
+    button.close-navbar {
+        position: absolute;
+        display: none;
+        top: 25px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        border: none;
+        background-color: transparent;
+        font-size: 30px;
+        color: gray;
+        cursor: pointer;
+    }
+
+    .sidebar-background.show {
+        display: flex;
+        animation: backgroundSidebar 0.3s ease-out;
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-color: black;
+        opacity: 0.5;
+        z-index: 99;
+    }
+
+    @keyframes backgroundSidebar {
+        0% { opacity: 0;}
+        100% { opacity: 0.5;}
+    }
+
+    .sidebar-background {
+        display: none;
+    }
+
+    button.close-navbar.show {
+        display: flex;
+    }
+}
+
+
+

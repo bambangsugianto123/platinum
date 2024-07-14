@@ -1,0 +1,82 @@
+button{
+    border-width: unset;
+    border-style: unset;
+    border-color: unset;
+    border-image: unset;
+    background-color: unset;
+    width: 100%;
+}
+
+
+.label{
+    margin-left: 10px;
+ }
+
+.button-bank{
+    position: relative;
+}
+.button-bank.active{
+    position: relative;
+    font-weight: 600;
+}
+
+.button-bank.active::after{
+    position: absolute;
+    content: "\2713";
+    font: 16px;
+    background: #5CB85F;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    right: 10%;
+    top: 15%;
+
+}
+
+.payment-card{
+    border: 1px solid #EFEFEF;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -8px rgba(0,0,0,0.1);
+
+}
+
+.bank-text{
+    border: 1px solid #D0D0D0;
+    min-width: 80px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.detail-payment{
+    padding: 20px;
+}
+
+.content-detail-section{
+    margin-top: 10px;
+}
+
+.cst-button {
+    color: white;
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #5CB85F;
+    padding: 14px 28px;
+    font-size: 16px;
+    /* cursor: pointer; */
+    text-align: center;
+  }
+
+.disabled{
+    background-color: #DEF1DF;
+    cursor:not-allowed;
+}
+
+.text-green{
+    color: #5CB85F;
+}

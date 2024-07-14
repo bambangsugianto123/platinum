@@ -1,0 +1,10 @@
+ul > li {
+    display: inline-block;
+    margin: 10px;
+}
+
+.section-step {
+    display: flex;
+    justify-content:flex-end;
+    right: 8rem;
+}

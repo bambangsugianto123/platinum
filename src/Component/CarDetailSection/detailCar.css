@@ -1,0 +1,35 @@
+@import "rsuite/dist/rsuite.css";
+
+.cst-button {
+    color: white;
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #5CB85F;
+    padding: 14px 28px;
+    font-size: 16px;
+    /* cursor: pointer; */
+    text-align: center;
+  }
+
+.info-date{
+    color:#aaaaaa;
+    margin-bottom: -0.75rem;
+}
+
+.rs-picker-menu .rs-calendar .rs-calendar-month-dropdown-cell-content, .rs-picker-menu .rs-calendar .rs-calendar-table-cell-content{
+  border-radius: 50%;
+}
+.rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
+background-color: #35B0A7;
+}
+
+.rs-calendar-table-cell-in-range::before{
+background-color: #dcf8f6;
+
+}
+
+.disabled{
+  background-color: #DEF1DF;
+  cursor:not-allowed;
+}
