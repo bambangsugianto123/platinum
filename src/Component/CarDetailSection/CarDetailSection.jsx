@@ -28,14 +28,11 @@ function CarDetailSection() {
 
   const navigate = useNavigate();
 
-  const API_URL = "";
+  const API_URL = "https://api-car-rental.binaracademy.org/customer";
   const getLocalStorage = JSON.parse(localStorage.getItem("user"));
+  console.log(getLocalStorage.access_token);
 
-  const {
-    allowedMaxDays,
-    beforeToday,
-    combine,
-  } = DateRangePicker;
+  const { allowedMaxDays, beforeToday, combine } = DateRangePicker;
 
   const onChangeDate = (date) => {
     if (!date) return;
@@ -77,7 +74,7 @@ function CarDetailSection() {
   const addPosts = async (startDate, endDate) => {
     try {
       let response = await axios.post(
-        `${API_URL}/customer/order`,
+        `${API_URL}/order`,
         {
           start_rent_at: startDate,
           finish_rent_at: endDate,
