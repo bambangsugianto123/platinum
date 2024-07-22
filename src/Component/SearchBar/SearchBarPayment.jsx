@@ -58,25 +58,25 @@ function SearchBarPayment({ detailCar }) {
             <div className="row mt-3">
               <div className="col-lg-3 d-flex flex-column justify-content-center">
                 <label htmlFor="name">Nama/Tipe Mobil</label>
-                <div className="text-secondary">{carDetail.name}</div>
+                <div className="text-secondary">{carDetail?.name}</div>
               </div>
 
               <div className="col-lg-3 d-flex flex-column justify-content-center">
                 <label htmlFor="category">Kategori</label>
-                <div className="text-secondary">{carDetail.category}</div>
+                <div className="text-secondary">{carDetail?.category}</div>
               </div>
 
               <div className="col-lg-3 d-flex flex-column justify-content-center">
                 <label htmlFor="price">Tanggal Mulai Sewa</label>
                 <div className="text-secondary">
-                  {formatDate(detailOrder.start_rent_at)}
+                  {formatDate(detailOrder?.start_rent_at)}
                 </div>
               </div>
 
               <div className="col-lg-2 d-flex flex-column justify-content-center">
                 <label htmlFor="status">Tanggal Akhir Sewa</label>
                 <div className="text-secondary">
-                  {formatDate(detailOrder.finish_rent_at)}
+                  {formatDate(detailOrder?.finish_rent_at)}
                 </div>
               </div>
 
