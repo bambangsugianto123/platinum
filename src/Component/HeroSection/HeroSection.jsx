@@ -20,12 +20,12 @@ function HeroSection({isButtonShow}) {
     }
 
     return (
-        <section id="hero" style={{minHeight: '500px'}}>
+        <section id="hero" style={{minHeight: '100px'}}>
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container mt-3">
                     <a className="navbar-brand text-light px-3 ml-3" href="/">BinarRent</a>
                     <button onClick={() => setSidebar('show')} className="navbar-toggler" type="button" aria-label='open sidebar'>
-                        <span className="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icons"></span>
                     </button>
                     <div className={`sidebar-background ${sidebar}`} onClick={() => setSidebar('')}></div>
                     <div className={`navbar-collapse ${sidebar}`} id='navbarNav'>

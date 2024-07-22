@@ -124,7 +124,7 @@ function PaymentSection() {
                             
                                     </form>
                                     <div>
-                                        <button className='btn btn-success w-100 mt-3' onClick={() => navigate(`/car/etiket/`)}>Upload</button>
+                                        <button className='btn btn-success w-100 mt-3' onClick={() => navigate(`/car/etiket/`)}>Konfirmasi</button>
                                     </div>
                                 </div>
                             )
