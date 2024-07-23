@@ -1,4 +1,4 @@
-import "./SignupSection.css";
+// import "./SignupSection.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";

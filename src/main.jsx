@@ -5,7 +5,7 @@ import store from "./store";
 import App from "./App.jsx";
 import "./assets/css/bootstrap.css";
 import "./assets/css/styles.css";
-import "./index.css";
+// import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

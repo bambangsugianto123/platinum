@@ -1,7 +1,57 @@
 body {
-  background-color: #f4f5f7;
+  font-family: Arial, sans-serif;
 }
 
-.bottom-shadow {
-  box-shadow: 0 4px 6px -6px rgba(0, 0, 0, 0.5); /* Adjust values to your liking */
+.bg-body-custom {
+  background-color: #f1f3ff;
+}
+
+.btn-primary:hover {
+  background-color: #f1f3ff;
+  color: var(--bs-primary);
+}
+
+.navbar-sticky {
+  background-color: #f1f3ff;
+  opacity: 0.95;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+}
+
+.btn-success {
+  background-color: var(--bs-success);
+  color: #f1f3ff;
+}
+
+.btn-success:active {
+  background-color: var(--bs-success);
+  color: #f1f3ff !important;
+}
+
+.btn-success:hover {
+  background-color: #f1f3ff;
+  color: var(--bs-success);
+}
+
+.card-icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+}
+
+.accordionFaqItem {
+  opacity: 0.99;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+}
+
+.same-height {
+  height: calc(1.5em + 0.4rem + 1px);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* This value matches the Bootstrap input height */
 }

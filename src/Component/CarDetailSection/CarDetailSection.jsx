@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarById } from "../../Feature/Cars/cars-slice";
-import "./detailCar.css";
+// import "./detailCar.css";
 import { DateRangePicker } from "rsuite";
 
 function CarDetailSection() {
