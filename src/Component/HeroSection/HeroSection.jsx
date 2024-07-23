@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authLogout } from "../../Feature/Auth/auth-slice";
 import {
-  Button,
   Col,
   Container,
   Image,
@@ -51,10 +50,10 @@ function HeroSection() {
       <section id="navbar">
         <Navbar expand={"lg"} className="navbar fixed-top bg-body-custom mb-3">
           <Container>
-            <Navbar.Brand href="#">
-              <Link to={"/"} className="btn btn-primary fw-bold">
+            <Navbar.Brand>
+              <a href="#" className="btn btn-primary fw-bold">
                 Cars-Rental
-              </Link>
+              </a>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"lg"}`} />
             <Navbar.Offcanvas
@@ -70,16 +69,17 @@ function HeroSection() {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#ourServices">Our Services</Nav.Link>
-                  <Nav.Link href="#action2">Why Us</Nav.Link>
-                  <Nav.Link href="#action2">Testimonial</Nav.Link>
-                  <Nav.Link href="#action2">FAQ</Nav.Link>
-                  <Link
+                  <Nav.Link href="#whyUs">Why Us</Nav.Link>
+                  <Nav.Link href="#testimonial">Testimonial</Nav.Link>
+                  <Nav.Link href="#FAQ">FAQ</Nav.Link>
+                  <Nav.Link
+                    as={Link}
                     to={"/signup"}
                     variant="success"
                     className="btn btn-success ms-3 fw-bold"
                   >
                     Register
-                  </Link>
+                  </Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
@@ -90,7 +90,7 @@ function HeroSection() {
       <section id="banner" className="container-fluid bg-body-custom pt-7">
         <Container>
           <Row>
-            <Col md={6}>
+            <Col md={6} className="pb-3">
               <h1>Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h1>
               <p className="lead">
                 Selamat datang di Binar Car Rental. Kami menyediakan mobil
@@ -105,8 +105,9 @@ function HeroSection() {
             </Col>
             <Col md={6}>
               <Image
+                fluid
                 src="/src/assets/images/img_car.png"
-                className="img-fluid"
+                className="mt-5"
               />
             </Col>
           </Row>
