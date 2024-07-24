@@ -34,7 +34,7 @@ const carApi = apiSlice.injectEndpoints({
     }),
     getCarById: builder.query({
       query: (id) => ({
-        url: `/v2/car/${id}`,
+        url: `/car/${id}`,
       }),
       transformResponse: async (response) => {
         // await new Promise((resolve) => setTimeout(resolve, 1500));

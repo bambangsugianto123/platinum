@@ -1,18 +1,16 @@
-import React, { Fragment, useState} from "react";
+import React, { Fragment, useState } from "react";
 import Footer from "../Component/Footer/Footer";
 import CarDetailSection from "../Component/CarDetailSection/CarDetailSection";
-import Header from "../Component/Header/Header";
-
+import HeroSection from "../Component/HeroSection/HeroSection";
 
 function CarDetail() {
-
-    return (
-        <Fragment>
-            <Header />
-            <CarDetailSection />
-            <Footer />
-        </Fragment>
-    )
+  return (
+    <>
+      <HeroSection />
+      <CarDetailSection />
+      <Footer />
+    </>
+  );
 }
 
 export default CarDetail;

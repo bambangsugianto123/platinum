@@ -55,9 +55,9 @@ function HeroSection() {
         <Navbar expand={"lg"} className="navbar fixed-top bg-body-custom mb-3">
           <Container>
             <Navbar.Brand>
-              <a href="#" className="btn btn-primary fw-bold">
+              <Link to={"/"} className="btn btn-primary fw-bold">
                 Cars-Rental
-              </a>
+              </Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"lg"}`} />
             <Navbar.Offcanvas
