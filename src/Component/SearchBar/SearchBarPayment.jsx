@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import "./style.css";
+// import "./style.css";
 
 function SearchBarPayment({ detailCar }) {
   const [carDetail, setCarDetail] = useState({});

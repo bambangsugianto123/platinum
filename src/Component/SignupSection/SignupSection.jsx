@@ -1,133 +1,130 @@
-import React from "react";
-import "./SignupSection.css";
-import * as Yup from 'yup'
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authRegister } from "../../Feature/Auth/auth-slice";
+import { useSignUpMutation } from "../../services/redux/apiSlices/authApi";
+import { setUserInfo } from "../../services/redux/reducerSlices/authSlice";
+import { toast } from "react-toastify";
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 
+function LoginSection() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const { userInfo } = useSelector((state) => state.auth);
+  // console.log(userInfo);
 
-function SignupSection() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { isLoggedIn } = useSelector(state => {return state.auth});
-    const { message }  = useSelector(state => {return state.message});
-
-    const handleSubmit = async(values, actions) => {
-        try {
-            dispatch(authRegister(values))
-            actions.setSubmitting(false);
-            actions.resetForm();
-        } catch (error) {
-            actions.setSubmitting(false);
-            console.log(error);
-            actions.resetForm();
-        }
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
     }
+  }, [navigate, userInfo]);
 
-    const signupSchema = Yup.object().shape({
-        name: Yup.string()
-        .required("Name is required")
-        .min(3, "Name must be 3 characters at minimum")
-        .max(15, "Name must be 15 characters at maximum"),
-        email: Yup.string()
-        .email("Invalid email adress format")
-        .required("Password is required"),
-        password: Yup.string()
-        .required("Password is required")
-        .min(6, "Password must be 6 characters at minimum"),
-    })
+  const [signUp] = useSignUpMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm({ mode: "onChange" });
 
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            password: '',
-        },
-        validationSchema: signupSchema,
-        onSubmit: (values, actions) => {
-            handleSubmit(values, actions)
-        },
-    })
-    
-    useEffect(() => {
-        isLoggedIn && navigate('/');
-    })
+  const signUpSubmit = async (data) => {
+    console.log(data);
+    try {
+      const res = await signUp(data).unwrap();
+      // console.log(res);
+      dispatch(setUserInfo(res));
+      toast.success("Login Success");
+      navigate("/");
+    } catch (error) {
+      // console.log(error);
+      toast.error(error?.data?.message || error?.error);
+    }
+  };
 
-    return (
-        <section id="signupSection" className="mb-0">
-            {isLoggedIn === false && (
-            <div className="container-fluid">
-                <div className="row min-vh-100">
-                    <div className="leftside col-lg-6 d-flex flex-column justify-content-sm-center align-items-center">
-                    <form className="mx-3" onSubmit={formik.handleSubmit}>
-                        <a href="/" className="text-decoration-none"><div className="rectangle d-flex justify-content-center align-items-center font-weight-bold text-dark">BCR</div></a>
-                        <h1 className="w-100 my-4">Sign Up</h1>
-                        <div className="form-group">
-                            <label htmlFor="name">Name*</label>
-                            <input  
-                                className="form-control" 
-                                aria-describedby="name" 
-                                placeholder="Full Name"
-                                id="name"
-                                name="name"
-                                type="text"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.name}
-                                style={formik.errors.name && formik.touched.name && {border: 'red 1px solid'}} 
-                            />
-                            {formik.touched.name && formik.errors.name ? <div className="text-danger mt-1">{formik.errors.name}</div> : null}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email*</label>
-                            <input 
-                                className="form-control" 
-                                placeholder="Contoh: johndoe@gmail.com"
-                                id="email" 
-                                name="email"
-                                type="email" 
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.email}
-                                style={formik.errors.email && formik.touched.email && {border: 'red 1px solid'}}
-                            />
-                            {formik.touched.email && formik.errors.email ? <div className="text-danger mt-1">{formik.errors.email}</div> : null}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Create Password*</label>
-                            <input 
-                                placeholder="6+ Karakter"
-                                className="form-control" 
-                                id="password" 
-                                name="password"
-                                type="password"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.password}
-                                style={formik.errors.password && formik.touched.password && {border: 'red 1px solid'}}
-                            />
-                            {formik.touched.password && formik.errors.password ? <div className="text-danger mt-1">{formik.errors.password}</div> : null}
-                        </div>
-                        {message != null && message != 'akun berhasil dibuat' ? <div className="alert alert-danger" role="alert">{message}</div> : message === 'akun berhasil dibuat'? navigate('/login') : null}
-                        <button type="submit" className="btn mt-3">Sign Up</button>
-                        <p className="mt-4 d-flex justify-content-center">Already have an account?<a href="/login">Sign In here</a></p>
-                    </form>
-                    </div>
-                    <div className="rightside col-lg-6 d-none d-lg-flex">
-                        <h1>Binar Car Rental</h1>
-                        <div className="image border">
-                            <img src="/Assets/landing-page.png" alt="landing-page" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            )}
-            
-        </section>
-    )
+  return (
+    <>
+      <section id="loginSection" className="mb-0">
+        <Container fluid>
+          <Row>
+            <Col xl={6} className="p-3 p-xl-5">
+              <Row className="p-3 p-xl-5">
+                <Col>
+                  <Row>
+                    <Image
+                      style={{ maxWidth: "100px" }}
+                      src="/src/assets/images/Rectangle 62.png"
+                      alt="retanggle"
+                    />
+                  </Row>
+                  <Row>
+                    <h1>Sign Up</h1>
+                  </Row>
+                  <Row>
+                    <Form onSubmit={handleSubmit(signUpSubmit)}>
+                      <Form.Group className="mb-3" controlId="formBasicName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                          type="Name"
+                          placeholder="Masukkan Name"
+                          {...register("name", {
+                            required: "Name harus diisi",
+                          })}
+                        />
+                      </Form.Group>
+
+                      <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="Masukkan Email"
+                          {...register("email", {
+                            required: "Email harus diisi",
+                          })}
+                        />
+                      </Form.Group>
+                      <Form.Group
+                        className="mb-3"
+                        controlId="formBasicPassword"
+                      >
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                          type="password"
+                          placeholder="Masukkan password"
+                          {...register("password", {
+                            required: "Password harus diisi",
+                          })}
+                        />
+                      </Form.Group>
+                      <Button
+                        disabled={!isValid}
+                        variant="primary"
+                        type="submit"
+                        className="w-100"
+                      >
+                        Sign In
+                      </Button>
+                    </Form>
+                  </Row>
+                  <Row>
+                    <p>
+                      Already have an account?{" "}
+                      <span>
+                        <Link to={"/login"}>Log in</Link>
+                      </span>
+                    </p>
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+            <Col xl={6} className="d-none d-xl-block">
+              <Image src="/src/assets/images/pict.png" alt="landing-page" />
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </>
+  );
 }
 
-export default SignupSection;
+export default LoginSection;

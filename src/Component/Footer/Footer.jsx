@@ -1,61 +1,62 @@
-import React from "react";
-import './Footer.css';
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaRegEnvelope,
+  FaTwitch,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
+const Footer = () => {
+  const socialMediaData = [
+    { icon: <FaFacebook />, platform: "Facebook" },
+    { icon: <FaInstagram />, platform: "Instagram" },
+    { icon: <FaTwitter />, platform: "Twitter" },
+    { icon: <FaRegEnvelope />, platform: "Email" },
+    { icon: <FaTwitch />, platform: "Twitch" },
+  ];
 
-function Footer() {
+  const renderSocialMediaIcons = socialMediaData.map((data, index) => {
     return (
-        <footer id="footer">
-            <div className="container pt-5 pb-3">
-                <div className="row">
-                    <div className="col-lg-4">
-                        <p className="fw-bold">Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</p>
-                        <p className="fw-bold">binarcarrental@gmail.com</p>
-                        <p className="fw-bold">081-233-334-808</p>
-                    </div>
-                    <div className="col-lg-2 links">
-                        <a href="/#ourServices">
-                            <p>Our Services</p> 
-                        </a>
-                        <a href="/#whyUs">
-                            <p>Why Us</p>
-                        </a>
-                        <a href="/#testimonial">
-                            <p>Testimonial</p>
-                        </a>
-                        <a href="/#faq">
-                            <p>FAQ</p>
-                        </a>
-                    </div>
-                    <div className="col-lg-3 mb-3">
-                        <p className="fw-bold">Connect with us</p>
-                        <div className="connect-us d-flex">    
-                            <a href="#" aria-label="facebook link" className="mr-2 d-flex justify-content-center text-decoration-none">
-                                <i className="fa-brands fa-facebook p-2"></i>
-                            </a>
-                            <a href="#" aria-label="instagram link" className="mr-2 d-flex justify-content-center text-decoration-none">
-                                <i className="fa-brands fa-instagram p-2"></i>
-                            </a>
-                            <a href="#" aria-label="twitter link" className="mr-2 d-flex justify-content-center text-decoration-none">
-                                <i className="fa-brands fa-twitter p-2"></i>
-                            </a>  
-                            <a href="#" aria-label="email link" className="mr-2 d-flex justify-content-center text-decoration-none">
-                                <i className="fa-solid fa-envelope p-2"></i>
-                            </a>  
-                            <a href="#" aria-label="message link" className="mr-2 d-flex justify-content-center text-decoration-none">
-                                <i className="fa-regular fa-message p-2"></i>
-                            </a>  
-                        </div>
-                        
-                    </div>
-                    <div className="col-lg-3 mb-3">
-                        <p className="fw-bold">Copyright Binar 2022</p>
-                        <a className="navbar-brand px-3 text-light p-1" href="/">BinarRent</a>
-                    </div>
-                </div>
+      <i
+        key={index}
+        className="bg-primary p-2 me-3 rounded-circle align-item-center text-white"
+        title="{data.platform}"
+      >
+        {data.icon}
+      </i>
+    );
+  });
+  return (
+    <section id="footer">
+      <div className="container my-7">
+        <div className="row">
+          <div className="col-md-4 mb-3">
+            <h6>Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</h6>
+            <p className="fw-bold">binarcarrental@gmail.com</p>
+            <p className="fw-bold">081-233-334-808</p>
+          </div>
+          <div className="col-md-2 mb-3">
+            <p>Our Services</p>
+            <p>Why Us</p>
+            <p>Testimonial</p>
+            <p>FAQ</p>
+          </div>
+          <div className="col-md-3 mb-3">
+            <h6>Connect with us</h6>
+            <div className="row ">
+              <div className="col-12">{renderSocialMediaIcons}</div>
             </div>
-        </footer>
-    )
-}
-
-
+          </div>
+          <div className="col-md-3">
+            <h6>Copyright Binar 2024</h6>
+            <Link to="/car" className="btn btn-primary fw-bold">
+              BINAR
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 export default Footer;

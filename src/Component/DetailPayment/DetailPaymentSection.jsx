@@ -1,13 +1,16 @@
 import React, { Fragment } from "react";
 import { useState } from "react";
 import SearchBarPayment from "../SearchBar/SearchBarPayment";
-import "./detailPayment.css";
+// import "./detailPayment.css";
 import axios from "axios";
 import { useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faChevronDown, faChevronUp } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCoffee,
+  faChevronDown,
+  faChevronUp,
+} from "@fortawesome/fontawesome-free-solid";
 import { useParams, useNavigate } from "react-router-dom";
-
 
 const API_URL = "";
 const getLocalStorage = JSON.parse(localStorage.getItem("user"));
@@ -23,16 +26,16 @@ function DetailPaymentSection() {
   let { id } = useParams();
 
   const toggleDescription = () => {
-    setDetailToggle((current) => (!current))
-    console.log(detailToggle)
-  }
+    setDetailToggle((current) => !current);
+    console.log(detailToggle);
+  };
   const handleClick = (type) => {
     if (type == "BNI") {
-      setIsActive(() => ({  type, active: true }));
+      setIsActive(() => ({ type, active: true }));
     } else if (type == "BCA") {
-      setIsActive(() => ({  type, active: true }));
+      setIsActive(() => ({ type, active: true }));
     } else if (type == "Mandiri") {
-      setIsActive(() => ({  type, active: true }));
+      setIsActive(() => ({ type, active: true }));
     }
   };
 
@@ -85,7 +88,10 @@ function DetailPaymentSection() {
         <section className="mb-5" id="detailPayment">
           <div className="container">
             <div className="row justify-content-between">
-              <div style={{ height: '100%' }} className="col-12 col-md-6 card py-4 payment-card">
+              <div
+                style={{ height: "100%" }}
+                className="col-12 col-md-6 card py-4 payment-card"
+              >
                 <h5>Pilih Bank Transfer</h5>
                 <p>
                   Kamu bisa membayar dengan transfer melalui ATM, Internet
@@ -151,15 +157,26 @@ function DetailPaymentSection() {
                   </div>
                   <div className="detail-payment-description">
                     <div className="header-detail d-flex justify-content-between">
-                      <h5>Total <FontAwesomeIcon style={{ cursor: 'pointer' }} onClick={toggleDescription} icon={detailToggle ?faChevronDown : faChevronUp} /> </h5>
+                      <h5>
+                        Total{" "}
+                        <FontAwesomeIcon
+                          style={{ cursor: "pointer" }}
+                          onClick={toggleDescription}
+                          icon={detailToggle ? faChevronDown : faChevronUp}
+                        />{" "}
+                      </h5>
                       <h5>{formatterRupiah(detailOrder.total_price)}</h5>
                     </div>
                   </div>
-                  <div style={{ 
-                    opacity: !detailToggle ? "0" : "1",
-                   transition: "all .2s",
-                   height: !detailToggle ? "0px" : "auto",
-                    visibility: `${!detailToggle ? 'hidden' : 'visible'}` }} className="content-detail mt-3">
+                  <div
+                    style={{
+                      opacity: !detailToggle ? "0" : "1",
+                      transition: "all .2s",
+                      height: !detailToggle ? "0px" : "auto",
+                      visibility: `${!detailToggle ? "hidden" : "visible"}`,
+                    }}
+                    className="content-detail mt-3"
+                  >
                     <div className="content-detail-section">
                       <h5>Harga</h5>
                       <ul className="lh-lg" style={{ listStyleType: "disc" }}>
@@ -208,20 +225,19 @@ function DetailPaymentSection() {
                         <h5>Total</h5>
                         <h5>{formatterRupiah(detailOrder.total_price)}</h5>
                       </div>
-                     
                     </div>
                   </div>
                   <button
-                        type="button"
-                        disabled={checkButtonPayment()}
-                        className={
-                          "cst-button" +
-                          (checkButtonPayment() == true ? " disabled" : "")
-                        }
-                        onClick={() => navigate(`/payment/transfer/${id}`)}
-                      >
-                        Bayar
-                      </button>
+                    type="button"
+                    disabled={checkButtonPayment()}
+                    className={
+                      "cst-button" +
+                      (checkButtonPayment() == true ? " disabled" : "")
+                    }
+                    onClick={() => navigate(`/payment/transfer/${id}`)}
+                  >
+                    Bayar
+                  </button>
                 </div>
               </div>
             </div>
