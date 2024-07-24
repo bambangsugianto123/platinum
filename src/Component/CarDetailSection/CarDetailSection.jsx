@@ -2,8 +2,12 @@ import { useParams } from "react-router-dom";
 import { useGetCarByIdQuery } from "../../services/redux/apiSlices/carApi";
 import SearchCarInput from "../CarSection/SearchCarInput";
 import { useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { Calendar } from "primereact/calendar";
 
 const Car = () => {
+  const [dates, setDates] = useState();
+  console.log(dates);
   const [carsParams, setCarsParams] = useState({
     name: "",
     category: "",
@@ -39,7 +43,10 @@ const Car = () => {
     isLoading,
     // error
   } = useGetCarByIdQuery(id);
-  // console.log(isLoading);
+
+  function formatPrice(price) {
+    return price.toLocaleString("id-ID").replace(/,/g, "."); // Replace commas with dots directly
+  }
   const renderSpiner = (
     <div className="container mt-7 ">
       <div className="row justify-content-center">
@@ -134,10 +141,30 @@ const Car = () => {
                         ? "8 - 12 penumpang"
                         : "2 - 4 penumpang"}
                     </p>
+
+                    <Row className="mb-3">
+                      <Col>
+                        <p>Tentukan lama sewa mobil (max, 7hari) </p>
+                        <Calendar
+                          value={dates}
+                          onChange={(e) => setDates(e.value)}
+                          selectionMode="range"
+                          readOnlyInput
+                          hideOnRangeSelection
+                        />
+                      </Col>
+                    </Row>
+
                     <div className="row">
                       <div className="col-6">Total</div>
-                      <div className="col-6 text-end">Rp. {car?.price}</div>
+                      <div className="col-6 text-end">
+                        Rp. {formatPrice(car?.price)}
+                      </div>
                     </div>
+
+                    <Row>
+                      <Button variant="success">Lanjutkan Pembayaran</Button>
+                    </Row>
                   </div>
                 </div>
               </div>

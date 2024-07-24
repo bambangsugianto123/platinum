@@ -108,9 +108,9 @@ function LoginSection() {
                   </Row>
                   <Row>
                     <p>
-                      Dont have an account?{" "}
+                      Already have an account?{" "}
                       <span>
-                        <Link to={"/signup"}>Sign Up for free</Link>
+                        <Link to={"/login"}>Log in</Link>
                       </span>
                     </p>
                   </Row>

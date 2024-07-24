@@ -1,13 +1,11 @@
-import { Fragment } from "react";
 import LoginSection from "../Component/LoginSection/LoginSection";
 
-
 function Login() {
-    return (
-        <Fragment>
-            <LoginSection />
-        </Fragment>
-    )
+  return (
+    <>
+      <LoginSection />
+    </>
+  );
 }
 
 export default Login;

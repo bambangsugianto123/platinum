@@ -7,6 +7,7 @@ function CarDetail() {
   return (
     <>
       <HeroSection />
+      <div className="mb-5 p-1"></div>
       <CarDetailSection />
       <Footer />
     </>
