@@ -1,11 +1,10 @@
-import { Fragment } from "react";
 import SignupSection from "../Component/SignupSection/SignupSection";
 
 function Signup() {
   return (
-    <Fragment>
+    <>
       <SignupSection />
-    </Fragment>
+    </>
   );
 }
 

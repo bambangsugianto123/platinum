@@ -1,173 +1,180 @@
-import axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { getAllCars } from "../../Feature/Cars/cars-slice";
-import SearchBar from "../SearchBar/SearchBar";
+import { useState } from "react";
+import { useGetCarsQuery } from "../../services/redux/apiSlices/carApi";
+import ShowCars from "./ShowCars";
+import ShowCarsLoader from "./ShowCarsLoader";
+import { useForm } from "react-hook-form";
+import CarsPagination from "./CarPagination";
+import { Col, Container, Row } from "react-bootstrap";
 
-function CarSection() {
-  const dispatch = useDispatch();
-  const cars = useSelector((state) => {
-    return state.cars.listCars.cars;
+const CarSection = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [carsParams, setCarsParams] = useState({
+    name: "",
+    category: "",
+    isRented: "",
+    minPrice: "",
+    maxPrice: "",
+    page: "",
+    pageSize: 8,
   });
-  console.log(cars);
-  const pageCount = useSelector((state) => {
-    return state.cars.listCars.pageCount;
-  });
 
-  const [loading, setLoading] = useState(true);
+  const {
+    data: carsData,
+    isLoading,
+    // error,
+  } = useGetCarsQuery(carsParams);
 
-  const [carName, setCarName] = useState("");
-  const [carCategory, setCarCategory] = useState("");
-  const [carPrice, setCarPrice] = useState("");
-  const [carStatus, setCarStatus] = useState("");
+  const handleSearch = (formData) => {
+    let minPrice = "";
+    let maxPrice = "";
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const carNameParams = searchParams.get("name");
-  const categoryParams = searchParams.get("category");
-  const priceParams = searchParams.get("price");
-  const statusParams = searchParams.get("status");
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const params = {
-    name: carNameParams,
-    category: categoryParams,
-    isRented: statusParams,
-    minPrice: priceParams,
-    page: currentPage,
-  };
-
-  const loadCar = async () => {
-    try {
-      setLoading(true);
-      await dispatch(getAllCars(params));
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
+    if (formData.price) {
+      const [min, max] = formData.price.split("-");
+      minPrice = min || "";
+      maxPrice = max || "";
     }
-  };
 
-  useEffect(() => {
-    loadCar();
-  }, [
-    currentPage,
-    carNameParams,
-    categoryParams,
-    categoryParams,
-    statusParams,
-  ]);
+    setCarsParams((prev) => ({
+      ...prev,
+      ...formData,
+      minPrice,
+      maxPrice,
+      page: 1,
+    }));
+  };
 
   return (
-    <Fragment>
-      <SearchBar
-        setSearchParams={setSearchParams}
-        carName={carName}
-        setCarName={setCarName}
-        carCategory={carCategory}
-        setCarCategory={setCarCategory}
-        carPrice={carPrice}
-        setCarPrice={setCarPrice}
-        carStatus={carStatus}
-        setCarStatus={setCarStatus}
-      />
-      <section id="cars">
-        <div className="container">
-          <div className="d-flex justify-content-end mb-5">
-            {currentPage > 1 ? (
-              <button
-                className="col-3 btn btn-secondary"
-                onClick={() => setCurrentPage(currentPage - 1)}
-              >
-                previous
-              </button>
-            ) : (
-              <button className=" col-3 btn btn-secondary" disabled>
-                previous
-              </button>
-            )}
-            <p className="col 2 d-flex justify-content-center align-items-center mb-0">
-              Page {currentPage}
-            </p>
-            {cars && currentPage < pageCount ? (
-              <button
-                className=" col-3 btn btn-secondary"
-                onClick={() => setCurrentPage(currentPage + 1)}
-              >
-                next
-              </button>
-            ) : (
-              <button className=" col-3 btn btn-secondary" disabled>
-                next
-              </button>
-            )}
-          </div>
-          <div className="row">
-            {!loading ? (
-              cars?.length ? (
-                cars?.map((car, index) => {
-                  return (
-                    <div key={index} className="col-lg-4 col-md-6">
-                      <div
-                        className="card p-3 d-flex flex-column justify-content-between"
-                        style={{ height: "100%" }}
-                      >
-                        {car.image ? (
-                          <img
-                            src={car.image}
-                            alt=""
-                            style={{ width: "100%" }}
+    <>
+      <section id="searchCarInput" style={{ marginTop: "-90px" }}>
+        <div className="container my-5">
+          <div className="row justify-content-center">
+            <div className="col-xl-11 col-md-12">
+              <div className="card shadow">
+                <div className="card-body">
+                  <form onSubmit={handleSubmit(handleSearch)}>
+                    <div className="row">
+                      <div className="col-xl-3">
+                        <div className="mb-3">
+                          <label htmlFor="carName" className="form-label mb-1">
+                            Nama Mobil
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="carName"
+                            placeholder="Ketik nama/tipe mobil"
+                            {...register("name")}
                           />
-                        ) : (
-                          <img
-                            src="/Assets/dummy.png"
-                            alt=""
-                            style={{ width: "100%" }}
-                          />
-                        )}
+                        </div>
+                      </div>
 
-                        <div>
-                          {car.name ? (
-                            <p className="mt-3">{car.name}</p>
-                          ) : (
-                            <p className="mt-3">Tidak ada nama</p>
-                          )}
-                          {car.price ? (
-                            <h5>
-                              Rp {car.price.toLocaleString("en-US")}/ Hari
-                            </h5>
-                          ) : (
-                            <h5>Tidak Ada Harga</h5>
-                          )}
-                          <p className="fw-bold">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.{" "}
-                          </p>
-                          <a
-                            href={`/car/${car.id}`}
-                            className="btn btn-success"
-                            style={{ width: "100%" }}
+                      <div className="col-xl-3">
+                        <div className="mb-3">
+                          <label htmlFor="category" className="form-label mb-1">
+                            Kategori
+                          </label>
+                          <select
+                            className="form-control"
+                            id="category"
+                            {...register("category")}
                           >
-                            Pilih Mobil
-                          </a>
+                            <option value="">Pilih Kategori</option>
+                            <option value={"small"}>2 - 4 Orang</option>
+                            <option value={"medium"}>4 - 6 Orang</option>
+                            <option value={"large"}>6 - 8 Orang</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="col-xl-2">
+                        <div className="mb-3">
+                          <label htmlFor="price" className="form-label mb-1">
+                            Harga
+                          </label>
+                          <select
+                            className="form-control"
+                            id="price"
+                            {...register("price")}
+                          >
+                            <option value="">Pilih Harga</option>
+                            <option value="100000-500000">
+                              100,000 - 500,000
+                            </option>
+                            <option value="500000-1000000">
+                              500,000 - 1,000,000
+                            </option>
+                            <option value="1000000-2000000">
+                              1,000,000 - 2,000,000
+                            </option>
+                            <option value="2000000-3000000">
+                              2,000,000 - 3,000,000
+                            </option>
+                            <option value="3000000-4000000">
+                              3,000,000 - 4,000,000
+                            </option>
+                            <option value="5000000-10000000">
+                              5,000,000 - 10,000,000
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="col-xl-2">
+                        <div className="mb-3">
+                          <label htmlFor="status" className="form-label mb-1">
+                            Status
+                          </label>
+                          <select
+                            className="form-control"
+                            id="status"
+                            {...register("isRented")}
+                          >
+                            <option value="">Pilih Status</option>
+                            <option value={true}>Tidak Tersedia</option>
+                            <option value={false}>Tersedia</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="col-xl-2 d-flex align-items-end">
+                        <div className="mb-3">
+                          <button
+                            type="submit"
+                            className="btn btn-success same-height d-flex align-self-center"
+                          >
+                            Cari Mobil
+                          </button>
                         </div>
                       </div>
                     </div>
-                  );
-                })
-              ) : (
-                <h2 className="text-center">Mobil Tidak Ditemukan</h2>
-              )
-            ) : (
-              <h2 className="text-center">Loading....</h2>
-            )}
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-    </Fragment>
+
+      <ShowCars cars={carsData} />
+      {isLoading && <ShowCarsLoader />}
+      <Container>
+        <Row>
+          <Col className="d-flex justify-content-center">
+            <CarsPagination
+              carsParams={carsParams}
+              setCarsParams={setCarsParams}
+              carsData={carsData}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
-}
+};
 
 export default CarSection;

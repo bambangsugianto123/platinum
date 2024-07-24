@@ -9,6 +9,7 @@ import PaymentTransfer from "../Pages/PaymentTransfer";
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";
 import NotFound from "../Pages/NotFound";
+import ProtectedRoutes from "../Component/ProtectedRoutes";
 const ListRouter = createBrowserRouter([
   {
     path: "/",
@@ -30,15 +31,6 @@ const ListRouter = createBrowserRouter([
     path: "/search",
     element: <Search />,
   },
-
-  {
-    path: "/payment/:id",
-    element: <Payment />,
-  },
-  {
-    path: "/payment/transfer/:id",
-    element: <PaymentTransfer />,
-  },
   {
     path: "/login",
     element: <Login />,
@@ -47,6 +39,21 @@ const ListRouter = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+  {
+    path: "",
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/payment/:id",
+        element: <Payment />,
+      },
+      {
+        path: "/payment/transfer/:id",
+        element: <PaymentTransfer />,
+      },
+    ],
+  },
+
   {
     path: "*",
     element: <NotFound />,

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../services/redux/reducerSlices/authSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { authLogout } from "../../Feature/Auth/auth-slice";
 import {
+  Button,
   Col,
   Container,
   Image,
@@ -11,21 +12,24 @@ import {
   Offcanvas,
   Row,
 } from "react-bootstrap";
-// import "./HeroSection.css";
+import { toast } from "react-toastify";
 
 function HeroSection() {
   const location = useLocation();
-  // console.log(location);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => {
-    return state.auth;
-  });
+
+  const { userInfo } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(authLogout());
-    alert("anda berhasil logout");
-    navigate(0);
+    try {
+      dispatch(logout());
+      navigate("/");
+      toast.success("Logout Success");
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.data?.message || error?.error);
+    }
   };
 
   useEffect(() => {
@@ -72,14 +76,18 @@ function HeroSection() {
                   <Nav.Link href="#whyUs">Why Us</Nav.Link>
                   <Nav.Link href="#testimonial">Testimonial</Nav.Link>
                   <Nav.Link href="#FAQ">FAQ</Nav.Link>
-                  <Nav.Link
-                    as={Link}
-                    to={"/signup"}
-                    variant="success"
-                    className="btn btn-success ms-3 fw-bold"
-                  >
-                    Register
-                  </Nav.Link>
+                  {!userInfo ? (
+                    <Button
+                      as={Link}
+                      to={"/login"}
+                      variant="success"
+                      className="btn btn-success fw-bold"
+                    >
+                      Login
+                    </Button>
+                  ) : (
+                    <Button onClick={handleLogout}> Logout</Button>
+                  )}
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

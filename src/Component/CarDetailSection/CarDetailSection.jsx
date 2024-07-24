@@ -4,7 +4,6 @@ import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarById } from "../../Feature/Cars/cars-slice";
-// import "./detailCar.css";
 import { DateRangePicker } from "rsuite";
 
 function CarDetailSection() {
@@ -29,8 +28,8 @@ function CarDetailSection() {
   const navigate = useNavigate();
 
   const API_URL = "https://api-car-rental.binaracademy.org/customer";
-  const getLocalStorage = JSON.parse(localStorage.getItem("user"));
-  console.log(getLocalStorage.access_token);
+  const getLocalStorage = JSON.parse(localStorage.getItem("userInfo"));
+  // console.log(getLocalStorage.access_token);
 
   const { allowedMaxDays, beforeToday, combine } = DateRangePicker;
 
@@ -107,7 +106,7 @@ function CarDetailSection() {
   };
 
   return (
-    <Fragment>
+    <>
       <SearchBar
         carName={carName}
         setCarName={setCarName}
@@ -160,7 +159,11 @@ function CarDetailSection() {
                       style={{ width: "100%" }}
                       onChange={(e) => onChangeDate(e)}
                       placeholder="Pilih tanggal mulai dan akhir sewa"
-                      disabledDate={combine(allowedMaxDays(7), beforeToday())}
+                      shouldDisableDate={combine(
+                        allowedMaxDays(7),
+                        beforeToday()
+                      )}
+                      // disabledDate={combine(allowedMaxDays(7), beforeToday())}
                       showOneCalendar
                     />
                     <div className="d-flex justify-content-between my-3">
@@ -249,7 +252,7 @@ function CarDetailSection() {
       ) : (
         <h2 className="d-flex justify-content-center m-5">Loading...</h2>
       )}
-    </Fragment>
+    </>
   );
 }
 
