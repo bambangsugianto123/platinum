@@ -146,11 +146,11 @@ function DetailPaymentSection() {
                     <ul className="lh-lg" style={{ listStyleType: "disc" }}>
                       <li className="d-flex justify-content-between mb-1">
                         <p className="">
-                          Sewa Mobil {detailCar.price} X{" "}
+                          Sewa Mobil {detailCar.price} X
                           {findDayDifference(
                             detailOrder.start_rent_at,
                             detailOrder.finish_rent_at
-                          )}{" "}
+                          )}
                           Hari
                         </p>
                         <p className="">{detailOrder.total_price}</p>

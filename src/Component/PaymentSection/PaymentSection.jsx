@@ -12,7 +12,7 @@ function PaymentSection() {
   const [paymentMethod, setPaymentMethod] = useState("ATM BCA");
   const [uploadPaymentProof, setUploadPaymentProof] = useState(false);
   const navigate = useNavigate();
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
   const [fileData, setFileData] = useState(null);
 
   const handleImageChange = (e) => {
@@ -116,18 +116,18 @@ function PaymentSection() {
               <div className="card p-4 mb-3">
                 <h5>Selesaikan Pembayaran Sebelum</h5>
                 <div className="d-flex justify-content-between">
-                  <p className="m-0 py-2 d-flex fw-normal justify-content-center align-items-center">
+                  <div className="m-0 py-2 d-flex fw-normal justify-content-center align-items-center">
                     {order?.createdAt
                       ? new Date(order.createdAt).toLocaleString()
                       : "Loading..."}
-                  </p>
-                  <p className="m-0 py-2 d-flex fw-normal justify-content-center align-items-center">
+                  </div>
+                  <div className="m-0 py-2 d-flex fw-normal justify-content-center align-items-center">
                     {order?.createdAt ? (
                       <Countdown targetDate={order?.createdAt} />
                     ) : (
                       "Loading..."
                     )}
-                  </p>
+                  </div>
                 </div>
               </div>
               <div className="card p-4 mb-3">
@@ -150,10 +150,10 @@ function PaymentSection() {
                       <div className="d-flex">
                         <input
                           disabled
-                          value={54104257877}
+                          value={order ? 54104257877 : ""}
                           id="rekening"
                           className="w-100 px-2 py-1"
-                        ></input>
+                        />
                         <button
                           className="px-3 btn btn-light"
                           onClick={(e) => {
@@ -172,10 +172,10 @@ function PaymentSection() {
                       <div className="d-flex">
                         <input
                           disabled
-                          value={order?.total_price}
-                          id="rekening"
+                          value={order?.total_price || ""}
+                          id="totalBayar"
                           className="w-100 px-2 py-1"
-                        ></input>
+                        />
                         <button
                           className="px-3 btn btn-light"
                           onClick={(e) => {
