@@ -1,14 +1,20 @@
-import React, { Fragment } from "react";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { Image } from "react-bootstrap";
+
+const invoiceData = {
+  namaBank: "Bank BCA",
+  namaMobil: "Toyota Avanza",
+  priceMobil: "IDR 500,000",
+  awalSewa: "2024-08-01",
+  akhirSewa: "2024-08-05",
+  slip: "https://www.jurnal.id/wp-content/uploads/2021/09/contoh-nota-kosong-434x628.png", // Replace with the actual image URL or base64 string
+};
 
 const E_tiket = () => {
   return (
-    <Fragment>
+    <>
       <div className="container mt-2">
         <div className="text-center pt-2">
-          <img src="/checklist.png" alt="success" />
+          <img src="/public/Assets/checklist.png" alt="success" />
           <h3>Pembayaran berhasil!</h3>
           <p>Tunjukkan invoice ini ke petugas BCR di titik temu.</p>
         </div>
@@ -23,10 +29,13 @@ const E_tiket = () => {
                   </p>
                 </div>
                 <div className="p-2">
-                  <button type="button" className="btn btn-outline-primary">
-                    <i className="bi bi-download p-1"></i>
+                  <a
+                    download="Invoice.pdf"
+                    className="btn btn-outline-primary"
+                    href={invoiceData.slip}
+                  >
                     Unduh
-                  </button>
+                  </a>
                 </div>
               </div>
 
@@ -34,19 +43,21 @@ const E_tiket = () => {
                 style={{
                   border: "1px solid rgba(0, 0, 0, .3)",
                   display: "flex",
-                  height: "162px",
+                  height: "750px",
                   marginBottom: "24px",
                 }}
               >
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
-                  <Viewer fileUrl="/sample.pdf" />
-                </Worker>
+                <Image
+                  src={invoiceData.slip}
+                  alt="Slip"
+                  style={{ width: "100%" }}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

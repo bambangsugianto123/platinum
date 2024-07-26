@@ -1,8 +1,9 @@
-import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 // import "./style.css";
+
+import { Container, Row, Col, Badge } from "react-bootstrap";
 
 function SearchBarPayment({ detailCar }) {
   const [carDetail, setCarDetail] = useState({});
@@ -27,26 +28,48 @@ function SearchBarPayment({ detailCar }) {
       style={{ marginTop: "-120px" }}
     >
       <div className="container ">
-        <div className="section-step ">
-          <ul className="stepper stepper-horizontal">
-            <li className="completed">
-              <img src="/Assets/1.png" alt="" />
-              <span className="label">Pilih Metode</span>
-            </li>
+        <Container className="section-step mt-3">
+          <Row className="justify-content-end">
+            <Row md="auto" className="justify-content-end">
+              <Col className="d-flex align-items-center gap-2 fs-6">
+                <Badge
+                  bg="light"
+                  text="dark"
+                  className="border border-primary"
+                  pill
+                >
+                  1
+                </Badge>
+                <div className="label">Pilih Metode</div>
+                <img src="/Assets/step.png" alt="Step Indicator" />
+              </Col>
+              <Col className="d-flex align-items-center gap-2 fs-6">
+                <Badge
+                  bg="light"
+                  text="dark"
+                  className="border border-primary"
+                  pill
+                >
+                  2
+                </Badge>
+                <div className="label">Bayar</div>
+                <img src="/Assets/step.png" alt="Step Indicator" />
+              </Col>
+              <Col className="d-flex align-items-center gap-2 fs-6">
+                <Badge
+                  bg="light"
+                  text="dark"
+                  className="border border-primary"
+                  pill
+                >
+                  3
+                </Badge>
+                <div className="label">Tiket</div>
+              </Col>
+            </Row>
+          </Row>
+        </Container>
 
-            <li className="active">
-              <img src="/Assets/step.png" alt="" />
-              <img src="/Assets/2.png" alt="" />
-              <span className="label">Bayar</span>
-            </li>
-
-            <li className="warning">
-              <img src="/Assets/step.png" alt="" />
-              <img src="/Assets/3.png" alt="" />
-              <span className="label">Tiket</span>
-            </li>
-          </ul>
-        </div>
         <div className=" d-flex row justify-content-center">
           <div className="row"></div>
 
@@ -58,26 +81,22 @@ function SearchBarPayment({ detailCar }) {
             <div className="row mt-3">
               <div className="col-lg-3 d-flex flex-column justify-content-center">
                 <label htmlFor="name">Nama/Tipe Mobil</label>
-                <div className="text-secondary">{carDetail?.name}</div>
+                <div>{carDetail?.name}</div>
               </div>
 
               <div className="col-lg-3 d-flex flex-column justify-content-center">
                 <label htmlFor="category">Kategori</label>
-                <div className="text-secondary">{carDetail?.category}</div>
+                <div>{carDetail?.category}</div>
               </div>
 
               <div className="col-lg-3 d-flex flex-column justify-content-center">
                 <label htmlFor="price">Tanggal Mulai Sewa</label>
-                <div className="text-secondary">
-                  {formatDate(detailOrder?.start_rent_at)}
-                </div>
+                <div>{formatDate(detailOrder?.start_rent_at)}</div>
               </div>
 
               <div className="col-lg-2 d-flex flex-column justify-content-center">
                 <label htmlFor="status">Tanggal Akhir Sewa</label>
-                <div className="text-secondary">
-                  {formatDate(detailOrder?.finish_rent_at)}
-                </div>
+                <div>{formatDate(detailOrder?.finish_rent_at)}</div>
               </div>
 
               <div className="col-lg-1 d-flex align-items-end"></div>

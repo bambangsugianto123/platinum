@@ -1,20 +1,15 @@
-import React, { Fragment, useState} from "react";
 import DetailPaymentSection from "../Component/DetailPayment/DetailPaymentSection";
 import Footer from "../Component/Footer/Footer";
-import Header from "../Component/Header/Header";
-import PaymentSection from "../Component/PaymentSection/PaymentSection";
-
+import HeroSection from "../Component/HeroSection/HeroSection";
 
 function Payment() {
-
-    return (
-        <Fragment>
-            <Header />
-            <DetailPaymentSection />
-
-            <Footer />
-        </Fragment>
-    )
+  return (
+    <>
+      <HeroSection />
+      <DetailPaymentSection />
+      <Footer />
+    </>
+  );
 }
 
 export default Payment;

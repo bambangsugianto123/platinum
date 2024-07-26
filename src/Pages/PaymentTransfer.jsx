@@ -2,15 +2,12 @@ import { useState } from "react";
 import Footer from "../Component/Footer/Footer";
 import Header from "../Component/Header/Header";
 import PaymentSection from "../Component/PaymentSection/PaymentSection";
-import ProgressBar from "../Component/ProgressBar/ProgressBar";
+import HeroSection from "../Component/HeroSection/HeroSection";
 
 function PaymentTransfer() {
-  const [page, setPage] = useState("payment method");
-
   return (
     <>
-      <Header />
-      <ProgressBar page={page} setPage={setPage} />
+      <HeroSection />
       <PaymentSection />
       <Footer />
     </>

@@ -1,15 +1,14 @@
-import { Fragment } from "react";
-import Header from "../Component/e-tiket/Header";
 import E_tiket from "../Component/e-tiket/E_tiket";
 import Footer from "../Component/Footer/Footer";
+import HeroSection from "../Component/HeroSection/HeroSection";
 
 const E_Tiket = () => {
   return (
-    <Fragment>
-      <Header />
+    <>
+      <HeroSection />
       <E_tiket />
       <Footer />
-    </Fragment>
+    </>
   );
 };
 

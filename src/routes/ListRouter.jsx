@@ -23,10 +23,7 @@ const ListRouter = createBrowserRouter([
     path: "/car/:id",
     element: <CarDetail />,
   },
-  {
-    path: "etiket",
-    element: <E_Tiket />,
-  },
+
   {
     path: "/search",
     element: <Search />,
@@ -50,6 +47,10 @@ const ListRouter = createBrowserRouter([
       {
         path: "/payment/transfer/:id",
         element: <PaymentTransfer />,
+      },
+      {
+        path: "/etiket",
+        element: <E_Tiket />,
       },
     ],
   },
