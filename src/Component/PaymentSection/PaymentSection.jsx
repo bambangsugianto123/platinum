@@ -53,7 +53,7 @@ function PaymentSection() {
         });
 
         toast.success("Payment proof uploaded successfully!");
-        navigate(`/etiket`);
+        navigate(`/etiket/${order.id}`);
       } catch (error) {
         console.error("Error uploading payment proof:", error);
         toast.error("Failed to upload payment proof.");

@@ -17,7 +17,7 @@ const Car = () => {
   } = useForm({
     mode: "onChange",
   });
-  const [dateRange, setDateRange] = useState(null);
+  const [dateRange, setDateRange] = useState([]);
   const [isDateRangeValid, setIsDateRangeValid] = useState(false);
   const navigate = useNavigate();
 

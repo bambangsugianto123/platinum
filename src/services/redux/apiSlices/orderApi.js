@@ -16,6 +16,7 @@ const orderApi = apiSlice.injectEndpoints({
         url: `/order/${id}`,
         method: "GET",
       }),
+      invalidatesTags: ["Order"],
     }),
 
     putOrderById: builder.mutation({

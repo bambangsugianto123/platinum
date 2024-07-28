@@ -49,7 +49,7 @@ const ListRouter = createBrowserRouter([
         element: <PaymentTransfer />,
       },
       {
-        path: "/etiket",
+        path: "/etiket/:id",
         element: <E_Tiket />,
       },
     ],
