@@ -3,7 +3,6 @@ import Home from "../Pages/Home";
 import Car from "../Pages/Car";
 import CarDetail from "../Pages/CarDetail";
 import E_Tiket from "../Pages/E_Tiket";
-import Search from "../Pages/Search";
 import Payment from "../Pages/Payment";
 import PaymentTransfer from "../Pages/PaymentTransfer";
 import Login from "../Pages/Login";
