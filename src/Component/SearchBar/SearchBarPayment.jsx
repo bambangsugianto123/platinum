@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
-// import "./style.css";
 
 import { Container, Row, Col, Badge } from "react-bootstrap";
+import Step from "../DetailPayment/Step";
 
 function SearchBarPayment({ detailCar }) {
   const [carDetail, setCarDetail] = useState({});
@@ -25,50 +24,10 @@ function SearchBarPayment({ detailCar }) {
     <section
       id="searchBarPayment"
       className="mb-5  "
-      style={{ marginTop: "-120px" }}
+      style={{ marginTop: "100px" }}
     >
       <div className="container ">
-        <Container className="section-step mt-3">
-          <Row className="justify-content-end">
-            <Row md="auto" className="justify-content-end">
-              <Col className="d-flex align-items-center gap-2 fs-6">
-                <Badge
-                  bg="light"
-                  text="dark"
-                  className="border border-primary"
-                  pill
-                >
-                  1
-                </Badge>
-                <div className="label">Pilih Metode</div>
-                <img src="/Assets/step.png" alt="Step Indicator" />
-              </Col>
-              <Col className="d-flex align-items-center gap-2 fs-6">
-                <Badge
-                  bg="light"
-                  text="dark"
-                  className="border border-primary"
-                  pill
-                >
-                  2
-                </Badge>
-                <div className="label">Bayar</div>
-                <img src="/Assets/step.png" alt="Step Indicator" />
-              </Col>
-              <Col className="d-flex align-items-center gap-2 fs-6">
-                <Badge
-                  bg="light"
-                  text="dark"
-                  className="border border-primary"
-                  pill
-                >
-                  3
-                </Badge>
-                <div className="label">Tiket</div>
-              </Col>
-            </Row>
-          </Row>
-        </Container>
+        <Step step1={true} />
 
         <div className=" d-flex row justify-content-center">
           <div className="row"></div>

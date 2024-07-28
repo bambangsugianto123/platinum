@@ -1,10 +1,8 @@
 import { useState } from "react";
 import SearchBarPayment from "../SearchBar/SearchBarPayment";
-import axios from "axios";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/fontawesome-free-solid";
@@ -12,7 +10,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useGetOrderByIdQuery } from "../../services/redux/apiSlices/orderApi";
 import { useGetCarByIdQuery } from "../../services/redux/apiSlices/carApi";
-import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 function DetailPaymentSection() {
   const [isActive, setIsActive] = useState({ type: "", active: false });
@@ -85,7 +83,9 @@ function DetailPaymentSection() {
 
   return (
     <>
-      <SearchBarPayment detailCar={detailOrder} />
+      <div style={{ marginTop: "-180px" }}>
+        <SearchBarPayment detailCar={detailOrder} />
+      </div>
       <section className="mb-5" id="detailPayment">
         <Container>
           <Row className="row justify-content-between">

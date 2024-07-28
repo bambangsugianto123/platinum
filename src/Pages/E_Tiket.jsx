@@ -1,11 +1,12 @@
 import E_tiket from "../Component/e-tiket/E_tiket";
 import Footer from "../Component/Footer/Footer";
-import HeroSection from "../Component/HeroSection/HeroSection";
+import Navigation from "../Component/Navigation/Navigation";
 
 const E_Tiket = () => {
   return (
     <>
-      <HeroSection />
+      <Navigation />
+      <div className="bg-body-custom" style={{ height: "200px" }}></div>
       <E_tiket />
       <Footer />
     </>

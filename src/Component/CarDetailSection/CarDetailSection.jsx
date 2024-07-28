@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 
 const Car = () => {
   const {
-    register,
     handleSubmit,
     formState: { isValid },
   } = useForm({
@@ -20,8 +19,6 @@ const Car = () => {
   const [dateRange, setDateRange] = useState([]);
   const [isDateRangeValid, setIsDateRangeValid] = useState(false);
   const navigate = useNavigate();
-
-  console.log(dateRange);
 
   const [carsParams, setCarsParams] = useState({
     name: "",
@@ -116,7 +113,9 @@ const Car = () => {
         renderSpiner
       ) : (
         <>
-          <SearchCarInput onSearch={handleSearch} />
+          <div style={{ marginTop: "-100px" }}>
+            <SearchCarInput onSearch={handleSearch} />
+          </div>
 
           <section>
             <div className="container mt-5">

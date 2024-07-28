@@ -23,11 +23,6 @@ const ListRouter = createBrowserRouter([
     path: "/car/:id",
     element: <CarDetail />,
   },
-
-  {
-    path: "/search",
-    element: <Search />,
-  },
   {
     path: "/login",
     element: <Login />,

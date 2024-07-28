@@ -7,6 +7,7 @@ import {
 } from "../../services/redux/apiSlices/orderApi";
 import { toast } from "react-toastify";
 import Countdown from "./Countdown";
+import Step from "../DetailPayment/Step";
 
 function PaymentSection() {
   const [paymentMethod, setPaymentMethod] = useState("ATM BCA");
@@ -67,49 +68,10 @@ function PaymentSection() {
 
   return (
     <>
-      <Container className="section-step mt-3">
-        <Row className="justify-content-end">
-          <Row md="auto" className="justify-content-end">
-            <Col className="d-flex align-items-center gap-2 fs-6">
-              <Badge
-                bg="light"
-                text="dark"
-                className="border border-primary"
-                pill
-              >
-                1
-              </Badge>
-              <div className="label">Pilih Metode</div>
-              <img src="/Assets/step.png" alt="Step Indicator" />
-            </Col>
-            <Col className="d-flex align-items-center gap-2 fs-6">
-              <Badge
-                bg="light"
-                text="dark"
-                className="border border-primary"
-                pill
-              >
-                2
-              </Badge>
-              <div className="label">Bayar</div>
-              <img src="/Assets/step.png" alt="Step Indicator" />
-            </Col>
-            <Col className="d-flex align-items-center gap-2 fs-6">
-              <Badge
-                bg="light"
-                text="dark"
-                className="border border-primary"
-                pill
-              >
-                3
-              </Badge>
-              <div className="label">Tiket</div>
-            </Col>
-          </Row>
-        </Row>
-      </Container>
-
-      <section className="mb-5" id="paymentDetail">
+      <div className="container p-4" style={{ marginTop: "-100px" }}>
+        <Step step1={true} step2={true} />
+      </div>
+      <section className="my-5" id="paymentDetail">
         <div className="container">
           <div className="row d-flex justify-content-evenly mx-1">
             <div className="col-lg-7 p-0">

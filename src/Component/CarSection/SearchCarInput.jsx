@@ -13,7 +13,7 @@ const SearchCarInput = ({ onSearch }) => {
   };
 
   return (
-    <section id="searchCarInput" style={{ marginTop: "-90px" }}>
+    <section id="searchCarInput">
       <div className="container my-5">
         <div className="row justify-content-center">
           <div className="col-xl-11 col-md-12">
