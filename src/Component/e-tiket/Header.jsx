@@ -1,8 +1,6 @@
-import React, { Fragment } from "react";
-
 const Header = () => {
   return (
-    <Fragment>
+    <>
       <nav className="navbar bg-light">
         <div className="container-fluid px-5">
           <a className="navbar-brand fw-bold">BinarRent</a>
@@ -36,7 +34,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,13 +1,25 @@
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useGetCarByIdQuery } from "../../services/redux/apiSlices/carApi";
+import { useCreateOrderMutation } from "../../services/redux/apiSlices/orderApi";
 import SearchCarInput from "../CarSection/SearchCarInput";
-import { useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Calendar } from "primereact/calendar";
+import { toast } from "react-toastify";
 
 const Car = () => {
-  const [dates, setDates] = useState();
-  console.log(dates);
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = useForm({
+    mode: "onChange",
+  });
+  const [dateRange, setDateRange] = useState([]);
+  const [isDateRangeValid, setIsDateRangeValid] = useState(false);
+  const navigate = useNavigate();
+
   const [carsParams, setCarsParams] = useState({
     name: "",
     category: "",
@@ -17,6 +29,7 @@ const Car = () => {
     page: "",
     pageSize: 8,
   });
+  const [createOrder] = useCreateOrderMutation();
 
   const handleSearch = (formData) => {
     let minPrice = "";
@@ -47,6 +60,7 @@ const Car = () => {
   function formatPrice(price) {
     return price.toLocaleString("id-ID").replace(/,/g, "."); // Replace commas with dots directly
   }
+
   const renderSpiner = (
     <div className="container mt-7 ">
       <div className="row justify-content-center">
@@ -61,13 +75,47 @@ const Car = () => {
     </div>
   );
 
+  useEffect(() => {
+    setIsDateRangeValid(dateRange && dateRange.length === 2);
+  }, [dateRange]);
+
+  const handleOrder = async () => {
+    if (!dateRange || dateRange.length !== 2) {
+      toast.error("Please select a valid rental period.");
+      return;
+    }
+
+    const [startDate, endDate] = dateRange.map(
+      (date) => date.toISOString().split("T")[0]
+    );
+
+    const orderData = {
+      car_id: car.id,
+      start_rent_at: startDate,
+      finish_rent_at: endDate,
+    };
+
+    try {
+      const res = await createOrder(orderData).unwrap();
+      console.log("Order created:", res);
+      const orderId = res.id; // Assuming 'id' is the field in the response containing the order ID
+      toast.success("Order created successfully.");
+      navigate(`/payment/${orderId}`); // Navigate to the payment page
+    } catch (error) {
+      console.error("Failed to create order:", error);
+      toast.error("There was an error creating your order. Please try again.");
+    }
+  };
+
   return (
     <>
       {isLoading ? (
         renderSpiner
       ) : (
         <>
-          <SearchCarInput onSearch={handleSearch} />
+          <div style={{ marginTop: "-100px" }}>
+            <SearchCarInput onSearch={handleSearch} />
+          </div>
 
           <section>
             <div className="container mt-5">
@@ -142,29 +190,40 @@ const Car = () => {
                         : "2 - 4 penumpang"}
                     </p>
 
-                    <Row className="mb-3">
-                      <Col>
-                        <p>Tentukan lama sewa mobil (max, 7hari) </p>
-                        <Calendar
-                          value={dates}
-                          onChange={(e) => setDates(e.value)}
-                          selectionMode="range"
-                          readOnlyInput
-                          hideOnRangeSelection
-                        />
-                      </Col>
-                    </Row>
+                    <Form onSubmit={handleSubmit(handleOrder)}>
+                      <Row className="mb-3">
+                        <Col>
+                          <p>Tentukan lama sewa mobil (max, 7hari) </p>
+                          <Calendar
+                            selectionMode="range"
+                            readOnlyInput
+                            hideOnRangeSelection
+                            value={dateRange}
+                            onChange={(e) => setDateRange(e.value)}
+                          />
+                        </Col>
+                      </Row>
 
-                    <div className="row">
-                      <div className="col-6">Total</div>
-                      <div className="col-6 text-end">
-                        Rp. {formatPrice(car?.price)}
+                      <div className="row">
+                        <div className="col-6">Total</div>
+                        <div className="col-6 text-end">
+                          Rp. {formatPrice(car?.price)}
+                        </div>
                       </div>
-                    </div>
 
-                    <Row>
-                      <Button variant="success">Lanjutkan Pembayaran</Button>
-                    </Row>
+                      <Row>
+                        <Col>
+                          <Button
+                            variant="success"
+                            disabled={!isValid || !isDateRangeValid}
+                            type="submit"
+                            className="w-100"
+                          >
+                            Lanjutkan Pembayaran
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Form>
                   </div>
                 </div>
               </div>

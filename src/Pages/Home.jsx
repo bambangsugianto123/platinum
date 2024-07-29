@@ -5,10 +5,12 @@ import CtaBanner from "../Component/CtaBanner/CtaBanner";
 import Faq from "../Component/Faq/Faq";
 import Footer from "../Component/Footer/Footer";
 import Testimonial from "../Component/Testimonial/Testimonial";
+import Navigation from "../Component/Navigation/Navigation";
 
 function Home() {
   return (
     <>
+      <Navigation />
       <HeroSection />
       <OurServices />
       <WhyUs />

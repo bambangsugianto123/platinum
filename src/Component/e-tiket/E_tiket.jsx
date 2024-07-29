@@ -1,14 +1,22 @@
-import React, { Fragment } from "react";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useGetOrderByIdQuery } from "../../services/redux/apiSlices/orderApi";
+import { PDFViewer, BlobProvider } from "@react-pdf/renderer";
+import MyDocument from "./MyDocument";
+import Step from "../DetailPayment/Step";
 
 const E_tiket = () => {
+  const { id } = useParams();
+  const { data: order, isLoading } = useGetOrderByIdQuery(id);
+
   return (
-    <Fragment>
+    <>
+      <div className="container p-4" style={{ marginTop: "-100px" }}>
+        <Step step1 step2 step3 />
+      </div>
       <div className="container mt-2">
         <div className="text-center pt-2">
-          <img src="/checklist.png" alt="success" />
+          <img src="/public/Assets/checklist.png" alt="success" />
           <h3>Pembayaran berhasil!</h3>
           <p>Tunjukkan invoice ini ke petugas BCR di titik temu.</p>
         </div>
@@ -23,30 +31,51 @@ const E_tiket = () => {
                   </p>
                 </div>
                 <div className="p-2">
-                  <button type="button" className="btn btn-outline-primary">
-                    <i className="bi bi-download p-1"></i>
-                    Unduh
-                  </button>
+                  {order && (
+                    <BlobProvider document={<MyDocument data={order} />}>
+                      {({ url }) => (
+                        <a
+                          href={url}
+                          download={`invoice-rental-${order?.id}.pdf`}
+                          className="btn btn-outline-primary fw-bold"
+                        >
+                          Unduh
+                        </a>
+                      )}
+                    </BlobProvider>
+                  )}
                 </div>
               </div>
 
-              <div
+              <Row
                 style={{
                   border: "1px solid rgba(0, 0, 0, .3)",
                   display: "flex",
-                  height: "162px",
+                  height: "680px",
                   marginBottom: "24px",
                 }}
               >
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
-                  <Viewer fileUrl="/sample.pdf" />
-                </Worker>
-              </div>
+                {isLoading ? (
+                  <Row className="justify-content-center align-items-center">
+                    <div
+                      className="spinner-border text-success d-flex justify-content-center align-items-center"
+                      style={{ width: "7rem", height: "7rem" }}
+                      role="status"
+                    >
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </Row>
+                ) : (
+                  <PDFViewer style={{ width: "100%", height: "100%" }}>
+                    <MyDocument data={order} />
+                  </PDFViewer>
+                )}
+              </Row>
             </div>
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

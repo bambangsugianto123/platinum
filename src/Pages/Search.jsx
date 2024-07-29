@@ -3,16 +3,14 @@ import CarSection from "../Component/CarSection/CarSection";
 import Footer from "../Component/Footer/Footer";
 import Header from "../Component/Header/Header";
 
-
 function Search() {
-    return (
-        <Fragment>
-            <Header />
-            <CarSection />
-            <Footer />
-        </Fragment>
-    )
+  return (
+    <>
+      <Header />
+      <CarSection />
+      <Footer />
+    </>
+  );
 }
-
 
 export default Search;

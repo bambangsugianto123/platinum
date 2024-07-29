@@ -44,7 +44,9 @@ const CarSection = () => {
 
   return (
     <>
-      <SearchCarInput onSearch={handleSearch} />
+      <div style={{ marginTop: "-100px" }}>
+        <SearchCarInput onSearch={handleSearch} />
+      </div>
       <ShowCars cars={carsData} />
       {isLoading && <ShowCarsLoader />}
       <Container>
