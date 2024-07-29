@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Col, Container, Image, Row } from "react-bootstrap";
+import img_car from "../../assets/images/img_car.png";
 
 function HeroSection() {
   const location = useLocation();
@@ -23,11 +24,7 @@ function HeroSection() {
               )}
             </Col>
             <Col md={6}>
-              <Image
-                fluid
-                src="/src/assets/images/img_car.png"
-                className="mt-5"
-              />
+              <Image fluid src={img_car} className="mt-5" />
             </Col>
           </Row>
         </Container>

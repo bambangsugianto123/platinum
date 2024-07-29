@@ -8,6 +8,7 @@ import "./assets/css/bootstrap.css";
 import "./assets/css/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

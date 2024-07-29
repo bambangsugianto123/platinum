@@ -1,7 +1,6 @@
-// import './OurServices.css';
-
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { FaCheckCircle } from "react-icons/fa";
+import img_service from "../../assets/images/img_service.png";
 
 function OurServices() {
   const servicesCars = [
@@ -37,11 +36,7 @@ function OurServices() {
         <Container className="mt-6">
           <Row className="p-md-6">
             <Col md={6}>
-              <Image
-                src="/src/assets/images/img_service.png"
-                fluid
-                alt="img services"
-              />
+              <Image src={img_service} fluid alt="img services" />
             </Col>
             <Col className="list-unstyled" md={6}>
               <h3>Best Car Rental for any kind of trip in (Lokasimu)!</h3>

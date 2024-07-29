@@ -29,7 +29,7 @@ function SearchBarPayment({ detailCar }) {
       <div className="container ">
         <Step step1={true} />
 
-        <div className=" d-flex row justify-content-center">
+        <div className=" d-flex row justify-content-center mt-1">
           <div className="row"></div>
 
           <div

@@ -16,7 +16,7 @@ const E_tiket = () => {
       </div>
       <div className="container mt-2">
         <div className="text-center pt-2">
-          <img src="/public/Assets/checklist.png" alt="success" />
+          <img src="/src/assets/images/checklist.png" alt="success" />
           <h3>Pembayaran berhasil!</h3>
           <p>Tunjukkan invoice ini ke petugas BCR di titik temu.</p>
         </div>
