@@ -7,7 +7,7 @@ import {
 function TestimonialCarousel() {
   const carouselItems = [
     {
-      imgSrc: "/src/assets/images/user/user-1.jpg",
+      imgSrc: "/Assets/images/user/user-1.jpg",
       stars: 5,
       quote:
         "Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done",
@@ -15,7 +15,7 @@ function TestimonialCarousel() {
       role: "General Manager - Scouter",
     },
     {
-      imgSrc: "/src/assets/images/user/user-2.jpg",
+      imgSrc: "/Assets/images/user/user-2.jpg",
       stars: 5,
       quote:
         "Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done",
@@ -23,7 +23,7 @@ function TestimonialCarousel() {
       role: "General Manager - Scouter",
     },
     {
-      imgSrc: "/src/assets/images/user/user-3.jpg",
+      imgSrc: "/Assets/images/user/user-3.jpg",
       stars: 5,
       quote:
         "Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done",
@@ -31,7 +31,7 @@ function TestimonialCarousel() {
       role: "General Manager - Scouter",
     },
     {
-      imgSrc: "/src/assets/images/user/user-4.jpg",
+      imgSrc: "/Assets/images/user/user-4.jpg",
       stars: 5,
       quote:
         "Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done",
@@ -39,7 +39,7 @@ function TestimonialCarousel() {
       role: "General Manager - Scouter",
     },
     {
-      imgSrc: "/src/assets/images/user/user-5.jpg",
+      imgSrc: "/Assets/images/user/user-5.jpg",
       stars: 5,
       quote:
         "Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done",

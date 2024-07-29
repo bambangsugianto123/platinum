@@ -53,7 +53,7 @@ function LoginSection() {
                   <Row>
                     <Image
                       style={{ maxWidth: "100px" }}
-                      src="/src/assets/images/Rectangle 62.png"
+                      src="/Assets/images/Rectangle 62.png"
                       alt="retanggle"
                     />
                   </Row>
@@ -109,7 +109,7 @@ function LoginSection() {
               </Row>
             </Col>
             <Col xl={6} className="d-none d-xl-block">
-              <Image src="/src/assets/images/pict.png" alt="landing-page" />
+              <Image src="/Assets/images/pict.png" alt="landing-page" />
             </Col>
           </Row>
         </Container>
