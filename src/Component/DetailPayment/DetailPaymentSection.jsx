@@ -19,6 +19,11 @@ function DetailPaymentSection() {
   const [detailToggle, setDetailToggle] = useState(true);
   const navigate = useNavigate();
 
+  function formatPrice(price) {
+    if (price == null) return "0";
+    return price.toLocaleString("id-ID").replace(/,/g, ".");
+  }
+
   let { id } = useParams();
   const {
     data: order,
@@ -113,7 +118,7 @@ function DetailPaymentSection() {
               ))}
             </div>
 
-            <div className="col-12 col-md-5 card payment-card">
+            <div className="col-12 col-md-5 card payment-card p-4">
               <div className="detail-payment">
                 <div className="detail-payment-item">
                   <h4>{detailCar.name}</h4>
@@ -129,7 +134,7 @@ function DetailPaymentSection() {
                         icon={detailToggle ? faChevronDown : faChevronUp}
                       />{" "}
                     </h5>
-                    <h5>{detailOrder.total_price}</h5>
+                    <h5>Rp {formatPrice(detailOrder.total_price)}</h5>
                   </div>
                 </div>
                 <div
@@ -146,14 +151,16 @@ function DetailPaymentSection() {
                     <ul className="lh-lg" style={{ listStyleType: "disc" }}>
                       <li className="d-flex justify-content-between mb-1">
                         <p className="">
-                          Sewa Mobil {detailCar.price} X
+                          Sewa Mobil Rp {formatPrice(detailCar.price)} X
                           {findDayDifference(
                             detailOrder.start_rent_at,
                             detailOrder.finish_rent_at
-                          )}
+                          )}{" "}
                           Hari
                         </p>
-                        <p className="">{detailOrder.total_price}</p>
+                        <p className="">
+                          Rp {formatPrice(detailOrder.total_price)}
+                        </p>
                       </li>
                     </ul>
                   </div>
@@ -162,11 +169,11 @@ function DetailPaymentSection() {
                     <ul className="lh-lg" style={{ listStyleType: "disc" }}>
                       <li className="d-flex justify-content-between mb-1">
                         <p className="">Pajak</p>
-                        <p className="text-green">Termasuk</p>
+                        <p className="text-success">Termasuk</p>
                       </li>
                       <li className="d-flex justify-content-between mb-1">
                         <p className="">Biaya Makan Supir</p>
-                        <p className="text-green">Termasuk</p>
+                        <p className="text-success">Termasuk</p>
                       </li>
                     </ul>
                   </div>
@@ -185,7 +192,7 @@ function DetailPaymentSection() {
                   <div className="total-payment">
                     <div className="d-flex justify-content-between my-3">
                       <h5>Total</h5>
-                      <h5>{detailOrder.total_price}</h5>
+                      <h5>Rp {formatPrice(detailOrder.total_price)}</h5>
                     </div>
                   </div>
                 </div>
@@ -193,7 +200,7 @@ function DetailPaymentSection() {
                   type="button"
                   disabled={checkButtonPayment()}
                   className={
-                    "btn btn-success w-100 mb-3" +
+                    "btn btn-success w-100 mb-3 text-white" +
                     (checkButtonPayment() == true ? " disabled" : "")
                   }
                   onClick={() => navigate(`/payment/transfer/${id}`)}
