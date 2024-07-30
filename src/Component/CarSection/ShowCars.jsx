@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const ShowCars = ({ cars }) => {
   function formatPrice(price) {
-    return price.toLocaleString("id-ID").replace(/,/g, "."); // Replace commas with dots directly
+    if (price == null) return "0";
+    return price.toLocaleString("id-ID").replace(/,/g, ".");
   }
 
   //   console.log(cars);
