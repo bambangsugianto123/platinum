@@ -16,7 +16,7 @@ const Navigation = () => {
       navigate("/");
       toast.success("Logout Success");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.data?.message || error?.error);
     }
   };

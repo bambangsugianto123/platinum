@@ -13,7 +13,7 @@ function LoginSection() {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   useEffect(() => {
     if (userInfo) {
@@ -29,15 +29,15 @@ function LoginSection() {
   } = useForm({ mode: "onChange" });
 
   const loginSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       const res = await login(data).unwrap();
-      console.log(res);
+      // console.log(res);
       dispatch(setUserInfo(res));
       toast.success("Login Success");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.data?.message || error?.error);
     }
   };
@@ -67,7 +67,7 @@ function LoginSection() {
                         <Form.Control
                           type="email"
                           placeholder="Masukkan Email"
-                          value={"admin@bcr.io"}
+                          // value={"admin@bcr.io"}
                           {...register("email", {
                             required: "Email harus diisi",
                           })}
@@ -81,7 +81,7 @@ function LoginSection() {
                         <Form.Control
                           type="password"
                           placeholder="Masukkan password"
-                          value={"123456"}
+                          // value={"123456"}
                           {...register("password", {
                             required: "Password harus diisi",
                           })}

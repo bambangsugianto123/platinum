@@ -48,7 +48,7 @@ function DetailPaymentSection() {
 
   const toggleDescription = () => {
     setDetailToggle((current) => !current);
-    console.log(detailToggle);
+    // console.log(detailToggle);
   };
 
   const handleClick = (type) => {

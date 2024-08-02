@@ -29,7 +29,7 @@ function LoginSection() {
   } = useForm({ mode: "onChange" });
 
   const signUpSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       const res = await signUp(data).unwrap();
       // console.log(res);

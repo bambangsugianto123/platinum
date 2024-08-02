@@ -8,8 +8,11 @@ import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Calendar } from "primereact/calendar";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Car = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   const {
     handleSubmit,
     formState: { isValid },
@@ -80,6 +83,12 @@ const Car = () => {
   }, [dateRange]);
 
   const handleOrder = async () => {
+    // check if login then navigate to "/login"
+    if (!userInfo) {
+      toast.error("Please login to make an order.");
+      navigate("/login");
+      return;
+    }
     if (!dateRange || dateRange.length !== 2) {
       toast.error("Please select a valid rental period.");
       return;
@@ -97,12 +106,12 @@ const Car = () => {
 
     try {
       const res = await createOrder(orderData).unwrap();
-      console.log("Order created:", res);
+      // console.log("Order created:", res);
       const orderId = res.id; // Assuming 'id' is the field in the response containing the order ID
       toast.success("Order created successfully.");
       navigate(`/payment/${orderId}`); // Navigate to the payment page
     } catch (error) {
-      console.error("Failed to create order:", error);
+      // console.error("Failed to create order:", error);
       toast.error("There was an error creating your order. Please try again.");
     }
   };
