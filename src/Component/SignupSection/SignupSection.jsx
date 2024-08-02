@@ -118,7 +118,7 @@ function LoginSection() {
               </Row>
             </Col>
             <Col xl={6} className="d-none d-xl-block">
-              <Image src="/src/assets/images/pict.png" alt="landing-page" />
+              <Image src="/Assets/images/pict.png" alt="landing-page" />
             </Col>
           </Row>
         </Container>
