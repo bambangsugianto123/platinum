@@ -53,7 +53,7 @@ function LoginSection() {
                   <Row>
                     <Image
                       style={{ maxWidth: "100px" }}
-                      src="/src/assets/images/Rectangle 62.png"
+                      src="/Assets/images/Rectangle 62.png"
                       alt="retanggle"
                     />
                   </Row>
